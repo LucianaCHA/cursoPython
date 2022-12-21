@@ -1,5 +1,5 @@
 from statistics import mean
-from utils import is_numeric_validation, is_integer_validation, create_user_list
+from utils import is_numeric_validation, is_integer_validation, create_user_list, is_prime_number
 
 # ejercicio 21 
 """
@@ -126,13 +126,14 @@ def print_primes():
     primes : list = []
 
     if check_valid_number:
-        check_is_prime : int = int(number)
-        aux :int = 2
-        while (aux < is_prime):
-            if is_prime % aux == 0:
-                return False
-            else:
-                aux += 1
+        for i in range(2, int(number)):
+            if is_prime_number(i) == True:
+                primes.append(i)
+        return primes
+    else:
+        return 'Insert a positive number'
+
+print(print_primes())
 
 
 

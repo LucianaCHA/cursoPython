@@ -31,3 +31,19 @@ def create_user_list():
         return user_list
     else: 
         return check_valid_n
+
+def is_prime_number(number):
+    check_valid_int = is_integer_validation(number)
+    
+    if  check_valid_int:
+        if number == 1:
+            return False
+        elif number == 2:
+            return True
+        else:
+            for i in range(2, number):
+                if number % i == 0:
+                    return False
+            return True
+    else:
+        return check_valid_int
