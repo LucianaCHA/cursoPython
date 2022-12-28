@@ -33,7 +33,7 @@ def create_user_list():
         return check_valid_n
 
 def is_prime_number(number):
-    check_valid_int = is_integer_validation(number)
+    check_valid_int = is_integer_validation(number) and number > 0
     
     if  check_valid_int:
         if number == 1:
@@ -47,3 +47,4 @@ def is_prime_number(number):
             return True
     else:
         return check_valid_int
+    

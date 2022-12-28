@@ -126,14 +126,63 @@ def print_primes():
     primes : list = []
 
     if check_valid_number:
-        for i in range(2, int(number)):
+        for i in range(2, int(number)+1):#+1 porque es excluyente 
             if is_prime_number(i) == True:
                 primes.append(i)
         return primes
     else:
         return 'Insert a positive number'
 
-print(print_primes())
+# print(print_primes())
+
+#25 Generar los primeros k numeros de la serie de fibonacci. Los primeros son el 0 yt el 1. el resto se calcula como la suma de los dos numeros que lo preceden. Además, indicar cuantos números primos existen en la serie generada
+
+def fibonacci():
+    number = input('Insert number for fibonacci serie: ')
+    check_valid_num = is_integer_validation(number)
+
+    number1 : int = 0
+    number2 : int = 1
+    serie : list = []
+    primes : int = 0
+    if check_valid_num:
+        for i in range(int(number)):
+            serie.append(number1)
+            number1, number2 = number2, number1 + number2
+            if is_prime_number(i) == True:
+                primes += 1   
+        return f'Fibonacci serie = {serie}, primes = {(primes)}'
+
+# print(fibonacci())
+
+# 26 dada una lista de palabras contar cuantas vocales y consonantes tiene cada palabra
+def insert_word() -> str:
+    word : str = input('Insert a new word: ')
+
+    if len(word) >= 3 :
+        return word
+    else:
+        return 'Insert at least 3 characters'
+
+def count_vowels_and_consonants():
+    word = insert_word()
+    words_list : list = []
+    if word != 'Insert at least 3 characters':
+        words_list.append(word)
+        answer: str = input('Want to add more words? (y/n) ')
+        if answer != 'y':
+            return words_list
+        else : 
+            count_vowels_and_consonants()
+    else :
+        return word
+    
+    
+
+print(count_vowels_and_consonants())
+    
+        
+
 
 
 
