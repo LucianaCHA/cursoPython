@@ -1,3 +1,4 @@
+import re
 from statistics import mean
 from utils import is_numeric_validation, is_integer_validation, create_user_list, is_prime_number
 
@@ -157,29 +158,69 @@ def fibonacci():
 
 # 26 dada una lista de palabras contar cuantas vocales y consonantes tiene cada palabra
 def insert_word() -> str:
-    word : str = input('Insert a new word: ')
+    word : str = input("Insert a word ('stop' to stop): ")
 
     if len(word) >= 3 :
         return word
     else:
         return 'Insert at least 3 characters'
 
+def create_words_list() -> list:
+    word : str = insert_word()
+    if word == 'stop':
+        return []
+    else:
+        return [word] + create_words_list()
+
 def count_vowels_and_consonants():
-    word = insert_word()
-    words_list : list = []
-    if word != 'Insert at least 3 characters':
-        words_list.append(word)
-        answer: str = input('Want to add more words? (y/n) ')
-        if answer != 'y':
-            return words_list
-        else : 
-            count_vowels_and_consonants()
-    else :
-        return word
-    
+    words_list : list = create_words_list()
+    answer : list = []
+    #reg ex eliminar caracteres especiales y espacios
+
+
+
+    for word in words_list:
+        vowels : int = 0
+        consonants : int = 0
+        numbers : int = 0
+        #re es una libreria para trabajar con expresiones regulares, en este caso, elimina los caracteres especiales y especiales. EStrictamente hablando en realidad los reemplaza por na da ''
+
+        for letter in re.sub(r'[^a-zA-Z0-9]', '', word):
+            if letter in 'aeiouAEIOU':
+                vowels += 1
+            elif letter in '0123456789':
+                numbers += 1
+            elif letter:
+                consonants += 1
+        answer.append(f'Word: {word}, vowels = {vowels}, consonants = {consonants} digits = {numbers}')    
+    return answer 
     
 
-print(count_vowels_and_consonants())
+# print(count_vowels_and_consonants())
+
+# 27 dado un texto contar cuantas vocales y consonantes tiene cada palabra
+
+def count_vowels_and_consonants_in_text():
+    text : str = input('Insert a text: ')
+    words : list = text.split(' ')
+    answer : list = []
+
+    for word in words:
+        vowels : int = 0
+        consonants : int = 0
+        numbers : int = 0
+
+        for letter in re.sub(r'[^a-zA-Z0-9]', '', word):
+            if letter in 'aeiouAEIOU':
+                vowels += 1
+            elif letter in '0123456789':
+                numbers += 1
+            elif letter:
+                consonants += 1
+        answer.append(f'Word: {word}, vowels = {vowels}, consonants = {consonants} digits = {numbers}')    
+    return answer
+
+print(count_vowels_and_consonants_in_text())
     
         
 
