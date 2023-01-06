@@ -220,8 +220,46 @@ def count_vowels_and_consonants_in_text():
         answer.append(f'Word: {word}, vowels = {vowels}, consonants = {consonants} digits = {numbers}')    
     return answer
 
-print(count_vowels_and_consonants_in_text())
-    
+# print(count_vowels_and_consonants_in_text())
+
+#Ejercicio 27: Dada una matriz de NxM elementos , calcular el promedio de cada fila y columna, mostrar en patalla lamatriz cargada y los promedios correspondientes
+def matrix_average():
+    n = input('Insert N: ')
+    m = input('Insert M: ')
+
+    valid_n = is_numeric_validation(n)
+    valid_m= is_numeric_validation(m)
+    matrix = []
+
+    if valid_n and valid_m:
+        for j in range(int(n)):
+            row : list = []
+            matrix.append(row)
+            for i in range(int(m)):
+                x  = input(f'Insert number for row {i+1}, column {j+1}: ')
+                valid_x = is_numeric_validation(x)
+                if valid_x:
+                    row.append(int(x))
+                else:
+                    return is_numeric_validation(x)
+    else:
+        return is_integer_validation(n)
+    matrix.append([])
+
+    for j in range(int(n)):
+        row_average = mean(matrix[j])
+        matrix[j].append(f'Row average: {row_average} ')
+
+    for i in range(int(m)):
+        column_average = mean([matrix[j][i] for j in range(int(n))])
+        matrix[int(n)].append(column_average)
+    matrix[int(n)].append('Columns average: ')
+
+    for i in matrix:
+        print(i)
+
+(matrix_average())
+
         
 
 

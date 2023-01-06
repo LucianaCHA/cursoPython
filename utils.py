@@ -20,11 +20,11 @@ def create_user_list():
     user_list: list = []
     n = input('Insert N: ')
     check_valid_n = is_numeric_validation(n)
-    if check_valid_n == True:
+    if check_valid_n:
         for i in range(int(n)):
             x = input('Insert a number: ')
             check_valid_x = is_integer_validation(x)
-            if check_valid_x == True:
+            if check_valid_x:
                 user_list.append(int(x))
             else:
                 return 'Insert a valid number'
