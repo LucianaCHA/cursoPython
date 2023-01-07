@@ -1,6 +1,9 @@
 #usefull functions for the project
 
 #function to validate if the input is a number
+import re
+
+
 def is_numeric_validation(value):
     if value.isnumeric() == False:
         return 'Invalid input. Insert a number higher tan zero'
@@ -47,4 +50,71 @@ def is_prime_number(number):
             return True
     else:
         return check_valid_int
-    
+
+def create_matrix():
+    matrix = []
+    n = input('Insert N: ')
+    m = input('Insert M: ')
+
+    valid_n = is_numeric_validation(n)
+    valid_m= is_numeric_validation(m)
+    if valid_n and valid_m:
+        for j in range(int(n)):
+            row : list = []
+            matrix.append(row)
+            for i in range(int(m)):
+                x  = input(f'Insert number for row {i+1}, column {j+1}: ')
+                valid_x = is_numeric_validation(x)
+                if valid_x:
+                    row.append(int(x))
+                else:
+                    return is_numeric_validation(x)
+        return matrix
+    else:
+        return is_integer_validation(n)
+
+def create_matrix_alphanumerics_digit():
+    matrix = []
+    n = input('Insert N: ')
+    m = input('Insert M: ')
+
+    valid_n = is_numeric_validation(n)
+    valid_m= is_numeric_validation(m)
+    if valid_n and valid_m:
+        for j in range(int(n)):
+            row : list = []
+            matrix.append(row)
+            for i in range(int(m)):
+                x  = input(f'Insert number or character {i+1}, column {j+1}: ')
+                #check valid char ornumber with regex
+                valid_x = re.compile(r'^[a-zA-Z0-9]+$')
+                if valid_x:
+                    row.append(x)
+                else:
+                    return 'Insert a valid character or number' 
+        return matrix
+    else:
+        return is_integer_validation(n)
+
+def create_matrix_base(base):
+    matrix = []
+    n = input('Insert N: ')
+    m = input('Insert M: ')
+
+    valid_n = is_numeric_validation(n)
+    valid_m= is_numeric_validation(m)
+    if valid_n and valid_m:
+        for j in range(int(n)):
+            row : list = []
+            matrix.append(row)
+            for i in range(int(m)):
+                x  = input(f'Insert number for row {i+1}, column {j+1}: ')
+                valid_x = 0 <= int(x) < base
+                if valid_x:
+                    row.append(int(x))
+                else:
+                    return 'Insert a valid number (for base {base} should be between 0 and {base})'
+        return matrix
+    else:
+        return is_integer_validation(n)
+        

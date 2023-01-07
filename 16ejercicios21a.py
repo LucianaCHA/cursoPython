@@ -1,6 +1,6 @@
 import re
 from statistics import mean
-from utils import is_numeric_validation, is_integer_validation, create_user_list, is_prime_number
+from utils import create_matrix, create_matrix_alphanumerics_digit, create_matrix_base, is_numeric_validation, is_integer_validation, create_user_list, is_prime_number
 
 # ejercicio 21 
 """
@@ -224,45 +224,51 @@ def count_vowels_and_consonants_in_text():
 
 #Ejercicio 27: Dada una matriz de NxM elementos , calcular el promedio de cada fila y columna, mostrar en patalla lamatriz cargada y los promedios correspondientes
 def matrix_average():
-    n = input('Insert N: ')
-    m = input('Insert M: ')
 
-    valid_n = is_numeric_validation(n)
-    valid_m= is_numeric_validation(m)
-    matrix = []
-
-    if valid_n and valid_m:
-        for j in range(int(n)):
-            row : list = []
-            matrix.append(row)
-            for i in range(int(m)):
-                x  = input(f'Insert number for row {i+1}, column {j+1}: ')
-                valid_x = is_numeric_validation(x)
-                if valid_x:
-                    row.append(int(x))
-                else:
-                    return is_numeric_validation(x)
-    else:
-        return is_integer_validation(n)
+    matrix = create_matrix()
+    n : int = len(matrix)
+    m : int = len(matrix[0])
     matrix.append([])
 
-    for j in range(int(n)):
+    for j in range(n):
         row_average = mean(matrix[j])
         matrix[j].append(f'Row average: {row_average} ')
 
-    for i in range(int(m)):
-        column_average = mean([matrix[j][i] for j in range(int(n))])
-        matrix[int(n)].append(column_average)
-    matrix[int(n)].append('Columns average: ')
+    for i in range(m):
+        column_average = mean([matrix[j][i] for j in range(n)])
+        matrix[n].append(column_average)
+    matrix[n].append('<= Columns average ')
 
     for i in matrix:
         print(i)
 
-(matrix_average())
+# (matrix_average())
 
-        
+#ejercicio 28, dada una matriz de caracetres , ordenar cada columna alfabeticamente
 
+def matrix_sort():
+    matrix = create_matrix_alphanumerics_digit()
+    n : int = len(matrix)
+    m : int = len(matrix[0])
 
+    for i in range(m):
+        column = [matrix[j][i] for j in range(n)]
+        column.sort()
+        for j in range(n):
+            matrix[j][i] = column[j]
+    for i in matrix:
+        print(i)
+# matrix_sort()
 
+# ejercicio 29 dada una matriz de N x M elementos, compuest de 0 y 1 , recorrer cada una de las filas y mostrar el valor decimal equivalente
 
-                
+def turn_decimal():
+    matrix : list = create_matrix_base(2)
+    n : int = len(matrix)
+    m : int = len(matrix[0])
+
+    for i in range(n):
+        print(i[::-1])
+
+turn_decimal()
+
