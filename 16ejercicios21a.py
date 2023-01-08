@@ -267,8 +267,22 @@ def turn_decimal():
     n : int = len(matrix)
     m : int = len(matrix[0])
 
+    if type(matrix) == str:
+        return matrix
+    
+    decimal_matrix = []
     for i in range(n):
-        print(i[::-1])
+        count = 0
+        power =  (m - 1)
+        for j in range(m):
+            n = matrix[i][j]
+            count += pow(2,power)*n
+            power -=1
+        decimal_matrix.append([count])
+    
+        print(*matrix[i], 'to decimal ', *decimal_matrix[i])
 
-turn_decimal()
+# turn_decimal()
+
+
 

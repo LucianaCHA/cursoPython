@@ -113,8 +113,10 @@ def create_matrix_base(base):
                 if valid_x:
                     row.append(int(x))
                 else:
-                    return 'Insert a valid number (for base {base} should be between 0 and {base})'
+                    return f'Insert valid numbers (for base {base} should be between 0 and {base})'
         return matrix
     else:
         return is_integer_validation(n)
+
+# print(create_matrix_base(2))
         
