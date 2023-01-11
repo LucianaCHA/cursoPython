@@ -272,10 +272,10 @@ def turn_decimal():
     
     decimal_matrix = []
     for i in range(n):
-        count = 0
-        power =  (m - 1)
+        count : int = 0
+        power : int=  (m - 1)
         for j in range(m):
-            n = matrix[i][j]
+            n :int = matrix[i][j]
             count += pow(2,power)*n
             power -=1
         decimal_matrix.append([count])
@@ -284,5 +284,62 @@ def turn_decimal():
 
 # turn_decimal()
 
+# Ejercicio 30 . 
+# Dada una tabla que contiene articulos , precios y stock simular la generación de una facturade alo sumo 6 articulos, en la cual el usuario solo debe ingresar el artículo y la cantidad (Revisar que el artículo tiene stock). 
+#El programa debería calcular subtotoal y total de la factura
 
+from tabulate import tabulate
+def create_invoice():
+
+    stock_master = [
+        ['ID','Items', 'Price', 'Stock'],
+        [1,'Pencil',10,100],
+        [2,'Rubber', 15, 203],
+        [3,'Pen',5, 121],
+        [4,'Sharper',8,87],
+        [5,'Crayons x 12', 25,172],
+        [6,'Paper', 12, 84],
+        [7,'Higlighter', 7, 100],
+        [8,'Eraser', 3, 200],
+        [9,'Notebook', 20, 100],
+        [10,'Stapler', 15, 100],
+        [11,'Staples x 1000', 5, 0],     
+        ]
+
+    invoice = [['Product', 'Price', 'Quantity', 'Subtotal']]
+
+    while True:
+        print('''Select an option:
+        [1] Select an item
+        [2] Show cart
+        [3] Sell
+        [4] Exit
+    ''' )
+        option : str = input('Insert an option: ')
+        
+        if option == '1':
+            print(tabulate(stock_master, headers='firstrow', tablefmt='fancy_grid'))
+            item : int = int(input('Insert the item number: '))
+            quantity : int = int(input('Insert the quantity: '))
+            if quantity <= stock_master[item][3]:
+                stock_master[item][2] -= quantity
+                subtotal : int = stock_master[item][2] * quantity
+                invoice.append([stock_master[item][1], stock_master[item][2], quantity, subtotal])
+            else:
+                print('Not enough stock')
+        elif option == '2':
+            print(tabulate(invoice, headers='firstrow', tablefmt='fancy_grid'))
+        elif option == '3':
+            print('Calculating total...')
+            invoice.append(['Total','','', sum([invoice[i][3] for i in range(1,len(invoice))])])
+            print(tabulate(invoice, headers='firstrow', tablefmt='fancy_grid'))
+            break
+        elif option == '4':
+            print('Bye')
+            break
+        else:
+            print('Invalid option')
+
+
+print(create_invoice())
 
