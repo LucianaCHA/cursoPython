@@ -2,6 +2,8 @@
 
 #function to validate if the input is a number
 import re
+from tabulate import tabulate
+
 
 
 def is_numeric_validation(value):
@@ -119,4 +121,36 @@ def create_matrix_base(base):
         return is_integer_validation(n)
 
 # print(create_matrix_base(2))
+
+
+# funtions foor the invoice exersise
+
+def select_product (stock_base, invoice) :
+
+    print(tabulate(stock_base, headers='firstrow', tablefmt='fancy_grid'))
+
+    item : int = int(input('Insert the item number: '))
+    quantity : int = int(input('Insert the quantity: '))
+    if quantity <= stock_base[item][3]:
+        stock_base[item][2] -= quantity
+        subtotal : int = stock_base[item][2] * quantity
+        invoice.append([stock_base[item][1], stock_base[item][2], quantity, subtotal])
+    else:
+        print('Not enough stock')
         
+def show_cart (cart):
+    print(tabulate(cart, headers='firstrow', tablefmt='fancy_grid'))
+
+
+def checkout (cart):
+    print('Calculating total...')
+    cart.append(['Total','','', sum([cart[i][3] for i in range(1,len(cart))])])
+    print(tabulate(cart, headers='firstrow', tablefmt='fancy_grid'))
+
+    print('Thank you for your purchase')
+    
+def turn_in_int(value):
+    if value.isnumeric() == False:
+        return 'Invalid input. Insert a number higher tan zero'
+    else:
+        return int(value)
