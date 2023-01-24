@@ -1,7 +1,6 @@
-from tabulate import tabulate
 import re
 from statistics import mean
-from utils import checkout, create_matrix, create_matrix_alphanumerics_digit, create_matrix_base, is_numeric_validation, is_integer_validation, create_user_list, is_prime_number, select_product, show_cart, turn_in_int
+from utils import checkout, create_matrix, create_matrix_alphanumerics_digit, create_matrix_base, get_integer_number, is_numeric_validation, is_integer_validation, is_prime_number, select_product, show_cart
 
 # ejercicio 21
 """
@@ -379,8 +378,8 @@ def wait_for_zero():
 
     total = 0
     while True:
-        answer = get_number('Insert a number ')
-        # re.sub recives 3 parameters : 
+        answer = get_float_number('Insert a number ')
+        # re.sub recives 3 parameters :
         # what to look for, what for replace the first árameter, variable to apply replacemente
         formated_answer = re.sub("[.-]", "", str(answer))
         if answer != 0:
@@ -392,7 +391,7 @@ def wait_for_zero():
             return 'You got it! Number is zero'
 
 
-def get_number(message):
+def get_float_number(message):
     '''Check if an input is a float. Returns number converted'''
 
     while True:
@@ -403,4 +402,49 @@ def get_number(message):
             print('Is not a number. Retry')
 
 
-wait_for_zero()
+# wait_for_zero()
+
+# Ejercicio 33: Solicitar a lusuario un numero enteroy luego un digito. Informar
+# ocurrencias del digito en el numero
+
+def look_coincidence():
+    ''' Pide dos valores al usuario'''
+    number = get_integer_number('Insert a integer number: ')
+
+    while True:
+        digit = get_integer_number('Insert a digit: ')
+        if digit > 10:
+            print('Invalid. Must be a digit')
+        else:
+            return count_coincidences(number, digit)
+
+
+def count_coincidences(integer: int, digit: int):
+    '''Recibe un numero entero y un digito, retorna repeticiones del digito en el numero'''
+    count = 0
+    for number in str(integer):
+        if digit == int(number):
+            count += 1
+    return f'{digit} is repeated {count} times in {integer}'
+
+
+# print(look_coincidence())
+
+# Ejercicio 34 : Crear una función que reciba por parḿetro una
+# lista con numeros y por paso por refeencia multiplique todos
+# los valores por dos
+
+
+def multiply_(arr: list, factor: int) -> list:
+    '''Recives a numbers list and a factir
+    returns a list with all the values multiplied
+    '''
+    for i, item in enumerate(arr):
+        try:
+            arr[i] *= factor
+        except ValueError:
+            print(f'{item} is NaN')
+    return arr
+
+
+print(multiply_([1, 2, 3, 4], 2))
