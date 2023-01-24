@@ -154,3 +154,22 @@ def turn_in_int(value):
         return 'Invalid input. Insert a number higher tan zero'
     else:
         return int(value)
+
+def get_float_number(message):
+    '''Check if an input is a float. Returns number converted'''
+
+    while True:
+        try:
+            return float(input(message))
+
+        except ValueError:
+            print('Is not a number. Retry')
+
+def get_integer_number(prompt: str) -> int:
+    '''If is posible returns a input converted to integer'''
+    while True:
+        try:
+            return int(input(prompt))
+
+        except ValueError:
+            print('Is not an integer. Retry')
