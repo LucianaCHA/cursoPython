@@ -20,7 +20,7 @@ class Madre(Abuelo):
 
 class Hijo(Padre, Madre):
   def saludar(self):
-    # super toma para herencia la primer lase
+    # super toma para herencia la primer clase, por eso no sirve para herencia multiple
     super(Hijo, self).saludar()
 
 hijo = Hijo()
