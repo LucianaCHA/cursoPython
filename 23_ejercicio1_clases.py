@@ -78,15 +78,45 @@ class TodoList:
 
 
 
-mis_tareas = TodoList()
+# mis_tareas = TodoList()
 
-print(mis_tareas)
-print(mis_tareas.show_tasks())
-print(mis_tareas.add_task('Leer'))
-print(mis_tareas.add_task('estudoar'))
-print(mis_tareas.add_task('Cantar'))
-print(mis_tareas.show_tasks())
-print(mis_tareas.remove_task('Leer'))
-print(mis_tareas.show_tasks())
-print(mis_tareas.remove_task('SAcara la basura'))
-print(mis_tareas.show_tasks())
+# print(mis_tareas)
+# print(mis_tareas.show_tasks())
+# print(mis_tareas.add_task('Leer'))
+# print(mis_tareas.add_task('estudoar'))
+# print(mis_tareas.add_task('Cantar'))
+# print(mis_tareas.show_tasks())
+# print(mis_tareas.remove_task('Leer'))
+# print(mis_tareas.show_tasks())
+# print(mis_tareas.remove_task('SAcara la basura'))
+# print(mis_tareas.show_tasks())
+
+
+# Ejercicio 4: Crear un clsase llamada Revertir, que recibirá una lista de palabras y las trasformará en un string con las palabras invertidas :
+#["hola", " como", "estas"] --> "estas como hola"
+
+# atributos = - lista_de_palabras
+
+# MEtodos :
+# - revertir
+# - mostrar_frase
+
+class Revert:
+    """ recibes a list and returns a string"""
+    def __init__(self, words_list) -> None:
+       self.words_list = words_list
+
+    def revert(self):
+        """ returns the list reversed"""
+        list = self.words_list[::-1]
+        self.words_list = list
+        return self.words_list
+    
+    def show_phrase(self):
+        """ transforms the reverted list i a sring and returns it"""
+        return ' '.join(map(str, self.words_list))
+
+
+new_list = Revert(['Hola', 'soy', 'Lu', 1, 2, 3])
+print(new_list.revert())
+print(new_list.show_phrase())
