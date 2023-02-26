@@ -2,7 +2,7 @@
 
 
 def valid_record(string):
-    """Check for valid data"""
+    """Checks if string is long enough to be a record in db"""
     if (
         string.isalpha() and
         string.isalpha() and
@@ -13,6 +13,39 @@ def valid_record(string):
     else:
         return False
 
+def valid_id(cursor):
+    """REceives an id an look for it in db, if existe return data else error message"""
+    id_record = input('Insert Id: ')
+
+    if id_record.isnumeric():
+        cursor.execute(
+            f'SELECT Name, Surname FROM People WHERE ID={id_record}')
+
+        result = cursor.fetchone()
+        if result is None:
+            return {
+                'result': 'Id does not exists',
+                'id': id_record}
+        return {
+            'result': result,
+            'id': id_record
+        }
+
+    return {
+        'result' : 'Invalid Id',
+        'id': id_record
+        }
+
+def valid_input(old_name, kind):
+    """receives two string"""
+    name = input(f'Insert new {kind} (Press enter to keep current): ')
+    if name == '':
+        name = old_name
+    else:
+        if not valid_record(name):
+            name = old_name
+            print('Invalid name, cannot update ',{kind})
+    return name
 
 def create_record(db_name, cursor):
     """expects a db and its cursor, to add name and surname to db """
@@ -32,21 +65,15 @@ def create_record(db_name, cursor):
     else:
         print('Error! Insert valid data')
 
-
 def show_record(cursor):
     """ Print a record if receives a valid id"""
-    id_record = input('Insert Id: ')
 
-    if id_record.isnumeric():
-        data = cursor.execute(
-            f'SELECT Name, Surname FROM People WHERE ID={id_record}')
-        if data is None:
-            print('Does not exist id')
-        else:
-            print('We found: ', cursor.fetchone())
+    response = valid_id(cursor)
+    data = response['result']
+    if isinstance(data, str):
+        print(data)
     else:
-        print('Invalid Id')
-
+        print(f'We found : {data[0]} {data[1]}')
 
 def show_all(cursor):
     """Prints a tuple with all records in db"""
@@ -56,41 +83,45 @@ def show_all(cursor):
     for person in people:
         print(f'{person[1]} {person[2]}')
 
-
 def edit_record(db_name, cursor):
-    """ Receives an id and if it valid edits db"""
-    id_record = input('ID: ')
+    """ Receives an id and if it is valid edits db"""
+    response = valid_id(cursor)
 
-    data = cursor.execute(
-        f'SELECT Name, Surname FROM People WHERE ID={id_record}')
+    data = response['result']
+    id_record = response['id']
 
-    if data is None:
-        print('Invalid id')
-    else:
-        data = cursor.fetchone()
-        old_first_name = data[0]
-        old_last_name = data[1]
+    if isinstance(data, str):
+        return data
 
-        print(f'Current data: {old_first_name} {old_last_name}')
+    old_first_name = data[0]
+    old_last_name = data[1]
 
-        first_name = input('Insert new name (Press enter to keep current): ')
-        if first_name == '' :
-            first_name = old_first_name
-        else:
-            if not valid_record(first_name):
-                first_name = old_first_name
-                print('Invalid name, cannot update')
-        last_name = input('Insert new surname (Press enter to keep current): ')
-        if last_name == '':
-            last_name = old_last_name
-        else:
-            if not valid_record(last_name):
-                last_name = old_last_name
-                print('Invalid surname, cannot update')
+    print(f'Current data is: {old_first_name} {old_last_name}')
 
-        cursor.execute(
-            f'UPDATE People SET Name= "{first_name}", Surname="{last_name}" WHERE id={id_record}')
+    first_name = valid_input(old_first_name, 'first name')
+    last_name = valid_input(old_last_name, 'last name')
 
-        db_name.commit()
+    cursor.execute(
+        f'UPDATE People SET Name= "{first_name}", Surname="{last_name}" WHERE id={id_record}')
 
-        print(f'Updated data: {first_name} {last_name}')
+    db_name.commit()
+
+    print(f'Updated data: {first_name} {last_name}')
+    return 'Record updated successfuly!'
+
+def delete_record(db_name, cursor):
+    """ Receives an id and if it is valid deletes record from db"""
+    response = valid_id(cursor)
+
+    data = response['result']
+    id_record = response['id']
+
+    if isinstance(data, str):
+        return data
+
+    cursor.execute(f'DELETE FROM People WHERE id={id_record}')
+
+    db_name.commit()
+
+    print(f'Record {id_record} deleted successfuly!')
+    return 'Record deleted successfuly!'

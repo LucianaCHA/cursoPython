@@ -1,6 +1,8 @@
 import sqlite3
 
-from crudfunciones import create_record, edit_record, show_record, show_all, valid_id, delete_record
+from crudfunciones import create_record, delete_record, edit_record, show_all, show_record
+
+
 
 db = sqlite3.connect('database.db')
 
@@ -24,9 +26,6 @@ while True:
     elif option == '3':
         edit_record(db, cursor)
     elif option == '4':
-        # id = input('ID: ')
-        # cursor.execute(f"DELETE FROM personas WHERE id = {id}")
-        # db.commit()
         delete_record(db, cursor)
     elif option == '5':
         show_all(cursor)
