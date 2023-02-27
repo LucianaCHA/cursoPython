@@ -1,12 +1,5 @@
-import sqlite3
-
+""" Crud pyton + sql3 """
 from crudfunciones import create_record, delete_record, edit_record, show_all, show_record
-
-
-
-db = sqlite3.connect('database.db')
-
-cursor = db.cursor()
 
 while True:
     print('''
@@ -20,16 +13,18 @@ while True:
     option = input('Choose an option: ')
 
     if option == '1':
-        create_record(db, cursor)
+        create_record()
     elif option == '2':
-        show_record(cursor)
+        show_record()
     elif option == '3':
-        edit_record(db, cursor)
+        edit_record()
     elif option == '4':
-        delete_record(db, cursor)
+        delete_record()
     elif option == '5':
-        show_all(cursor)
+        show_all()
     elif option == '6':
+        cursor.close()
+        print('Connection closed')
         break
     else:
         print('Invalid option!')

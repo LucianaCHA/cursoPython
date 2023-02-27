@@ -1,17 +1,25 @@
 """ Provides functions to handle crud in db"""
+import sqlite3
+
+def connect_db():
+    """ Open db connection"""
+    try:
+        database = sqlite3.connect('database.db')
+        return database, database.cursor()
+    except Exception:# no es unabuena practica
+        print("Can 't connect database'")
+        return 0
+
 
 
 def valid_record(string):
     """Checks if string is long enough to be a record in db"""
-    if (
+    return (
         string.isalpha() and
         string.isalpha() and
         3 <= len(string) <= 50 and
         3 <= len(string) <= 50
-    ):
-        return True
-    else:
-        return False
+    )
 
 def valid_id(cursor):
     """REceives an id an look for it in db, if existe return data else error message"""
@@ -47,8 +55,10 @@ def valid_input(old_name, kind):
             print('Invalid name, cannot update ',{kind})
     return name
 
-def create_record(db_name, cursor):
+def create_record():
     """expects a db and its cursor, to add name and surname to db """
+    db_name, cursor = connect_db()
+
     first_name = input('Name: ')
     last_name = input('Lastname: ')
 
@@ -58,15 +68,17 @@ def create_record(db_name, cursor):
     ):
         cursor.execute(
             "INSERT INTO People(Name, Surname) VALUES(?,?)", (first_name, last_name))
-
+        cursor.close()
         db_name.commit()
 
         print('Record added successfuly!')
     else:
         print('Error! Insert valid data')
+    db_name.close()
 
-def show_record(cursor):
+def show_record():
     """ Print a record if receives a valid id"""
+    db_name, cursor = connect_db()
 
     response = valid_id(cursor)
     data = response['result']
@@ -74,17 +86,22 @@ def show_record(cursor):
         print(data)
     else:
         print(f'We found : {data[0]} {data[1]}')
+    db_name.close()
 
-def show_all(cursor):
+def show_all():
     """Prints a tuple with all records in db"""
+    db_name, cursor = connect_db()
     cursor.execute('SELECT * FROM People')
     people = cursor.fetchall()
+    cursor.close()
 
     for person in people:
         print(f'{person[1]} {person[2]}')
+    db_name.close()
 
-def edit_record(db_name, cursor):
+def edit_record():
     """ Receives an id and if it is valid edits db"""
+    db_name, cursor = connect_db()
     response = valid_id(cursor)
 
     data = response['result']
@@ -103,14 +120,16 @@ def edit_record(db_name, cursor):
 
     cursor.execute(
         f'UPDATE People SET Name= "{first_name}", Surname="{last_name}" WHERE id={id_record}')
+    cursor.close()
 
     db_name.commit()
 
     print(f'Updated data: {first_name} {last_name}')
     return 'Record updated successfuly!'
 
-def delete_record(db_name, cursor):
+def delete_record():
     """ Receives an id and if it is valid deletes record from db"""
+    db_name, cursor = connect_db()
     response = valid_id(cursor)
 
     data = response['result']
@@ -120,6 +139,7 @@ def delete_record(db_name, cursor):
         return data
 
     cursor.execute(f'DELETE FROM People WHERE id={id_record}')
+    cursor.close()
 
     db_name.commit()
 
