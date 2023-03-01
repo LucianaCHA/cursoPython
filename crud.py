@@ -23,7 +23,6 @@ while True:
     elif option == '5':
         show_all()
     elif option == '6':
-        cursor.close()
         print('Connection closed')
         break
     else:

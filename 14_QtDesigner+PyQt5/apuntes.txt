@@ -1,0 +1,33 @@
+The tutorial is quite old but descriptive
+
+PySide 
+- LGPL licence, private code
+- Free , but has some bugs
+
+PyQt 
+- Free but must to be open source
+- To sell an app must pay a licence , 
+- Less buggs 
+
+At implementation they are pretty similar
+
+Let's start! 
+
+1. Install Qt Design
+para Linux 
+  $sudo apt-get install build-essential libgl1-mesa-dev
+
+2- Crear entorno virtualenv
+3- Para ccrear archivos de requiorements 
+
+  $pip install pipreqs (similar a freeze)
+
+  $pipreqs (crea requerimets.txt)
+
+  $pip freeze > requirements.txt (para agregar nuevas dependencias )
+
+4- Install PyQt 
+  $pip install pyqt5
+
+5- Istall PySide
+$ pip install pyside2
