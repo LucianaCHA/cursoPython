@@ -11,4 +11,4 @@ On the other hand it contains practice exercises, in many of them I setted out t
 
 ## Finally
 
-As I progress with the course I will continue updating this repo. I 'm enjoying to learn Python and I am delighted because so far I see that it provides a lot of flexibility and it is widely used in very diferents tasks. Moreover, has an incredible amount of libraries and packages.
+As I progress with the course I will continue updating this repo. I 'm enjoying to learn Python and I am delighted because so far I cann see it provides a lot of flexibility and it is widely used in very diferents tasks. Moreover, has an incredible amount of libraries and packages. Can't wait to pply all this in new project! 
