@@ -31,3 +31,9 @@ para Linux
 
 5- Istall PySide
 $ pip install pyside2
+
+6- Para instalar qt design en Linux
+  $sudo apt-get update && sudo apt-get upgrade
+  $sudo apt-get -y install build-essential openssl libssl-dev libssl1.0 libgl1-mesa-dev libqt5x11extras5 (DESCARAGA EL EJECUTABLE)
+  $chmod +x qt*.run (ejecutar en ruta donde se descargó lo anterior, en general va a descargas)
+  $./qt*.run 
