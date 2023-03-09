@@ -37,3 +37,12 @@ $ pip install pyside2
   $sudo apt-get -y install build-essential openssl libssl-dev libssl1.0 libgl1-mesa-dev libqt5x11extras5 (DESCARAGA EL EJECUTABLE)
   $chmod +x qt*.run (ejecutar en ruta donde se descargó lo anterior, en general va a descargas)
   $./qt*.run 
+  
+  
+  
+  
+  7-Trabaja sobre form con Qt designer
+  8- pyside2-uic ui>py // esto convierte el form de ui a py, ejecutar parado en e path que contiene al archivo .ui
+  9- pyuic5 -x ui -o py // toma el ui y genera u .py
+  pyrcc5 -o py qrc
+  
