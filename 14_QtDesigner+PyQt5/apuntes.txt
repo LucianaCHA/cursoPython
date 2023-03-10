@@ -46,3 +46,4 @@ $ pip install pyside2
   9- pyuic5 -x ui -o py // toma el ui y genera u .py
   pyrcc5 -o py qrc
   
+A lanzar app en pySie hay varias coss comentadas que deben fixearse para que funcione
