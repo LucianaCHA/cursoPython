@@ -1,4 +1,4 @@
-from typing import Callable, Dict, List , NoReturn, Union
+from typing import Callable, Dict, List , NoReturn, Optional, Union
 
 # type hinting 
 
@@ -56,3 +56,16 @@ def funcion1(name : str) -> str:
     return f'Hello {name}'
 
 print(function(funcion1, 'Juan')) ## un ejemplo de objeto invocable es una funcion que recibe otra funcion como parametro y la ejecuta  ##
+
+### typing para opcionales
+
+def optional(a: int, b: Optional[int] = None) -> int:
+    if b is None:
+        return a
+    return a + b
+
+print(optional(1, 2))
+
+def functio (name : str, surname : Optional[str] = '') -> str:
+    return f'Hello {name} {surname}'
+print(functio('Juan'))
