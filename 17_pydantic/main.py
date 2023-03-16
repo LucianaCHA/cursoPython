@@ -31,3 +31,4 @@ class Listas(BaseModel):
 lista = Listas(lista_simple=[1,2,3], lista_typing=[1,2,3])
 
 print(lista)
+
