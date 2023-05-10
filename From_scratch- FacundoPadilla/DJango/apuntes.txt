@@ -1,0 +1,155 @@
+Django es un framework de traajo
+Muchas ventajas : docu, seguridad, soporte de la comunidad y popular. IG está hecho co esto del lado del servidor 
+
+Iniciar un proyecto
+
+$ django-admin startproject [nombre del proyecto]
+
+esto va a crear un directorio con varias cosas 
+miProyecto/
+├── manage.py
+└── miProyecto/
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+
+The outer myproject/ directory is just a container for your project. You can rename this directory to whatever you want.
+
+The inner myproject/ directory is the actual Python package for your project. The name of this package is the Python package name that you'll use to import things from your project.
+
+manage.py is a command-line utility that lets you interact with your project in various ways, such as running the development server, creating database tables, and creating new apps.
+
+myproject/__init__.py is an empty file that tells Python that the myproject/ directory should be treated as a Python package.
+
+myproject/settings.py contains the configuration settings for your project, such as database settings, installed apps, and middleware.
+
+myproject/urls.py contains the URL routing configuration for your project.
+
+myproject/wsgi.py is a Python module that contains the WSGI (Web Server Gateway Interface) application object for your project. This object is used to interface with WSGI-compatible web servers, such as Apache or Nginx.
+
+***********************************MIGRACIONES*************************************************************
+ In Django, a migration is a Python file that represents a change to your database schema. Migrations allow you to evolve your database schema over time, adding new tables or columns, changing data types, or modifying existing data.
+
+When you make a change to your database schema, you create a new migration file using the python manage.py makemigrations command. This command examines your models and generates a migration file that describes the changes to be made to the database schema. For example, if you add a new field to a model, the migration file will contain a AddField operation that adds a new column to the corresponding database table.
+
+Once you've generated the migration file, you can apply it to your database using the python manage.py migrate command. This command reads the migration file and applies the necessary changes to your database schema.
+
+Migrations are stored in the migrations/ directory of each Django app. Each migration file has a name that includes a timestamp, so that migrations can be applied in the correct order.
+
+One important thing to note is that migrations are designed to be version-controlled along with the rest of your codebase. This means that you can track changes to your database schema over time using version control tools like Git. When you deploy your application to a new environment, you can use migrations to bring the database schema up to date with the current version of the code.
+
+
+
+
+*************************************ADMIN*****************
+A superuser in Django is a user account with full administrative permissions over the Django project and its associated database. When you create a new Django project using django-admin startproject, it automatically creates a new SQLite database and a superuser account with the username admin and a blank password.
+
+To access the Django admin site, which provides a web-based interface for managing your project's data, you'll need to log in with a superuser account. You can create a new superuser account using the python manage.py createsuperuser command. This command prompts you for a username, email address, and password, and then creates a new superuser account with those credentials.
+
+Once you've created a superuser account, you can log in to the admin site by visiting /admin on your project's URL. From there, you can create, read, update, and delete records in your project's database, as well as perform other administrative tasks like managing users and groups.
+
+Superusers have full access to all parts of the Django project, so it's important to use strong passwords and to limit the number of users who have superuser privileges. In a production environment, you should also consider using a more robust database like PostgreSQL instead of the default SQLite database, and you should secure your project's database credentials and other sensitive information.
+
+*******************************************INICIALIZNDO APP ****************************************************************
+- the python manage.py startapp command to create a new app. This command creates a directory with the app's name and several files to get you started.
+
+-An app is a self-contained component of a Django project that provides a specific functionality. For example, you might create an app for managing user accounts or for displaying blog posts.
+
+-An app can contain several Python modules, such as models.py (where you define your app's data models), views.py (where you define your app's views), and forms.py (where you define your app's forms).
+
+-In addition to Python modules, an app can also contain templates (HTML files that define the app's user interface) and static files (such as images, CSS stylesheets, and JavaScript files).
+
+-To use an app in your Django project, you'll need to add it to the project's INSTALLED_APPS setting in settings.py. This tells Django to include the app's URLs and other resources in the project.
+
+-By convention, an app's URLs should be defined in a separate urls.py file in the app's directory. This file should include a urlpatterns list that maps URL patterns to views.
+
+- Django includes some basic templates and views to get you started. You can customize these templates and views to fit your app's specific needs.
+
+When you're developing an app, it's a good idea to write tests to ensure that your app works as expected. Django provides a testing framework that makes it easy to write and run tests for your app.
+
+Finally, when you're ready to deploy your app to a production environment, you'll need to configure your app's settings for that environment. This might include changing your database settings, setting up static file serving, and configuring logging.
+
+of the files created when you run python manage.py startapp:
+
+models.py: This file is where you define your app's data models, which represent the tables and relationships in your app's database. You define each model as a Python class that inherits from django.db.models.Model.
+
+views.py: This file is where you define the views that handle HTTP requests and responses for your app. Views are Python functions that take a request object as input and return an HTTP response.
+
+urls.py: This file is where you define the URLs that map to your app's views. You define each URL pattern as a Python regex that maps to a specific view.
+
+admin.py: This file is where you register your app's models with the Django admin site. When you register a model, Django provides a default admin interface that you can use to manage records in the model's corresponding database table.
+
+apps.py: This file is where you define your app's configuration settings. By default, the file includes a name attribute that specifies the app's name and a default_auto_field attribute that specifies the default database field type to use for new models.
+
+tests.py: This file is where you write tests to ensure that your app's models, views, and other components work as expected. Django provides a testing framework that makes it easy to write and run tests for your app.
+
+In addition to these files, Django also creates a directory with the same name as your app, which contains a migrations/ directory for managing database migrations and a templates/ directory for storing HTML templates.
+
+
+
+***********************templates e injeccion de html******************************************
+
+In Django, templates are used to generate dynamic HTML pages. Django templates are similar to HTML files, but they include placeholders for dynamic content. These placeholders are called template tags and are enclosed in curly braces, for example:
+
+
+<h1>Welcome, {{ username }}!</h1>
+
+In the example above, {{ username }} is a template tag that will be replaced with the value of the username variable when the template is rendered.
+
+Django also provides a templating engine that includes a number of built-in tags and filters that can be used to manipulate and format data in the template.
+
+One important aspect of templates in Django is preventing HTML injection attacks. Django provides a number of built-in protections against HTML injection, including auto-escaping and safe filters. Auto-escaping ensures that any data that is output in the template is properly escaped to prevent HTML injection attacks. The safe filter can be used to explicitly mark content as safe, for example:
+
+
+<p>{{ some_html|safe }}</p>
+In the example above, some_html is assumed to be a variable containing HTML content. By passing it through the safe filter, we are telling Django that this content is safe to output without any additional escaping.
+
+Overall, Django's templating system is a powerful and flexible tool for generating dynamic HTML pages while keeping your application secure from HTML injection attacks.
+
+-- Los templates dben alojarse en una carpeta nombrada templates y por buena practica dentor va una nueva carpeta con el nombre de la app , ahi dentro van los htmls
+
+Pra vincular el html a una vista la refiero desde la request en views
+
+
+*****************************************VISTA**************************************************
+
+En Django, un modelo es una clase de Python que define la estructura de una tabla en una base de datos relacional. Los modelos se utilizan para interactuar con la base de datos y realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) en los datos.
+
+Para crear un modelo en Django, primero debes definir una clase que herede de django.db.models.Model. Luego, dentro de la clase, debes definir los campos de la tabla como atributos de clase.
+
+Por ejemplo, si quisieras crear una tabla de "Libros" con los campos "Título", "Autor" y "Fecha de Publicación", crearías un modelo de la siguiente manera:
+
+
+from django.db import models
+
+class Libro(models.Model):
+    titulo = models.CharField(max_length=200)
+    autor = models.CharField(max_length=100)
+    fecha_publicacion = models.DateField()
+
+
+
+En este ejemplo, hemos definido una clase llamada Libro que hereda de models.Model. La clase tiene tres atributos de clase que corresponden a los campos que queremos almacenar en la tabla: titulo, autor y fecha_publicacion. Cada uno de estos campos es una instancia de una clase de modelo de Django que representa el tipo de campo que estamos almacenando en la base de datos (en este caso, una cadena de caracteres, otra cadena de caracteres y una fecha, respectivamente).
+
+Una vez que has definido tus modelos, puedes ejecutar el comando python manage.py makemigrations para generar una migración que describa los cambios que has hecho en los modelos. Luego, puedes ejecutar el comando python manage.py migrate para aplicar las migraciones a la base de datos y crear las tablas correspondientes.
+
+Después de crear los modelos, puedes utilizarlos en tus vistas y plantillas para interactuar con la base de datos y mostrar y editar los datos. Por ejemplo, puedes utilizar la clase Libro que definimos anteriormente para buscar todos los libros en la base de datos y pasarlos a una plantilla para mostrarlos:
+
+
+from django.shortcuts import render
+from .models import Libro
+
+def lista_libros(request):
+    libros = Libro.objects.all()
+    return render(request, 'lista_libros.html', {'libros': libros})
+
+
+En este ejemplo, hemos definido una vista llamada lista_libros que busca todos los libros en la base de datos utilizando la clase Libro.objects.all(). Luego, pasamos los libros a una plantilla llamada lista_libros.html utilizando la función render de Django. En la plantilla, podemos acceder a los datos utilizando el nombre de la variable que les hemos asignado en la vista (libros).
+
+
+Al crear un modelo se ejecuta makemigratios paa que django actualice loscambios y luego hay que agregarlo al admin 
+
+from .models import Person
+# Register your models here.
+admin.site.register(Person)

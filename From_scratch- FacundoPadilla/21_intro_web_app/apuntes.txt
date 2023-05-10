@@ -1,0 +1,38 @@
+Un poco de contexto
+
+ANtes de 2003 habia muchos frameworks que en muchos casos consumian servidores particulares, lo cual limitaba el desarrollo
+
+A lo aterior viene WSGI es una especificacion que describe como se comunica un servidor web con una app 
+
+|cliente| hace un request
+    || esa request va a un servidor
+    ||
+|servidor| puede ser un ngnix , proxy inverso
+    ||    ese server se lo pasa a servidor WSGI, el mas 
+    ||    usado es gunicorn
+|gunicorn|
+    ||  gunicorn traduce el pedido para que lo pueda leer 
+    || el  framework 
+    ||
+    /|\
+   / | \
+flask|  otra
+    django   
+**********************************************************
+Pasos previos
+
+1. crear entorno virtualen
+2. instalar fastapi, uvicorn e insaomnia
+
+********************************************************
+primer ejercicio
+from fastapi import FastAPI
+
+
+app = FastAPI()
+
+@app.get('/') # el metodo 
+async def index(): # la corutina/ vista 
+    return {'key': 'value'}
+
+se levanta servidor con uvicorn main:app --reload

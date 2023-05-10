@@ -1,0 +1,26 @@
+(esto trae un montón de cosas instaladas por defecto)=>
+
+  $python3 -m venv 
+
+(por eso instala virtualenv)
+
+  $pip3 install virtualenv
+
+ [nombre del entorno]
+
+(se instala un archivo txt que se llama activate, lo vamos a llamar para activar entorno)
+  $source [nombre del entorno]/bin/activate
+
+(para desactivar )
+  $deactivate
+
+(recomienda instalar freeze , que sirve para mostrar paquetes instalados no nativos de python )
+
+  $pipi install freeze
+(para geerar un txt con dependencias)
+
+  $pip freeze > requirements.txt 
+
+(para instalar dependencias )
+
+  $ pip install -r requirements.txt
