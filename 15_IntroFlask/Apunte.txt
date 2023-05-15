@@ -1,8 +1,0 @@
-1- crear entorno virtualenv
-python3 -m virtualenv env_flask
-
-2- activar entorno virtual
-
-3- installar flask 
-4pip install flask
-5- instanciar un a app flask en app.py 
